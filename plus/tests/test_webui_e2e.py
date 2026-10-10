@@ -5,10 +5,25 @@ Qwen and Gemma architectures.
 """
 
 import json
+import socket
 import pytest
 
 gradio_client = pytest.importorskip("gradio_client", reason="gradio_client is not installed")
 Client = gradio_client.Client
+
+
+def _is_server_online(host="127.0.0.1", port=7860) -> bool:
+    try:
+        with socket.create_connection((host, port), timeout=0.5):
+            return True
+    except OSError:
+        return False
+
+
+pytestmark = pytest.mark.skipif(
+    not _is_server_online(),
+    reason="Gradio dev server is not running on 127.0.0.1:7860",
+)
 
 
 def test_gradio_frontend_audit_e2e():

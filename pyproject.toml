@@ -50,3 +50,5 @@ caresentry-dashboard = "demo.cli_dashboard:main"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_functions = ["test_*"]
+pythonpath = [".", "src", "guard/src", "clinical/src", "plus/src"]
+
